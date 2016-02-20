@@ -36,8 +36,8 @@
  * 
  * int main()
  * {
- * 	bcut_suite_run("Dummy test", 1, greater_test);
- * 	return 0;
+ *  bcut_suite_run("Dummy test", 1, greater_test);
+ *  return 0;
  * }
  * ~~~
  */
@@ -72,8 +72,8 @@ typedef void (*bcut_test_fn) (char*, bool*);
  *  validated.
  *  
  */
-#define BCUT_TEST(name) \
-	void name (char* bcut_error, bool* bcut_pass)
+#define BCUT_TEST(name)                                                 \
+    void name (char* bcut_error, bool* bcut_pass)
 
 /*! \brief Basic assertion that modify bcut_pass and bcut_error if it is not
  *  validated.
@@ -81,16 +81,16 @@ typedef void (*bcut_test_fn) (char*, bool*);
  *  Several BCUT_ASSERT() per BCUT_TEST() is authorized, but only the first
  *  failure will be reported.
  */
-#define BCUT_ASSERT(expr)                     \
-	do{                                       \
-		if(*bcut_pass) {                      \
-			*bcut_pass=(expr);                \
-			if(!(*bcut_pass)) {               \
-				snprintf(bcut_error, BCUT_BUFFER_SIZE, "%s: l%d: "#expr, \
-				         __func__, __LINE__); \
-			}                                 \
-		}                                     \
-	}while(0)
+#define BCUT_ASSERT(expr)                                               \
+    do{ \
+        if(*bcut_pass) { \
+            *bcut_pass=(expr); \
+            if(!(*bcut_pass)) { \
+                snprintf(bcut_error, BCUT_BUFFER_SIZE, "%s: l%d: "#expr, \
+                         __func__, __LINE__); \
+            } \
+        } \
+    }while(0)
 
 /*! \brief Groups and tests several BCUT_TEST() in a row, printing wether it
  * succeeded and where it failed, if applicable.
@@ -103,28 +103,28 @@ typedef void (*bcut_test_fn) (char*, bool*);
  */
 static inline void bcut_suite_run(const char* name, size_t n, ...)
 {
-	size_t i = 0;
+    size_t i = 0;
     char error_buffer[BCUT_BUFFER_SIZE];
-	bool pass = true;
-	bcut_test_fn unit_test = NULL;
+    bool pass = true;
+    bcut_test_fn unit_test = NULL;
 
     va_list args;
     va_start (args, n);
     
     printf("Testing %s: ", name);
-	for(i=0; i<n && pass; ++i)
-	{
-		unit_test = va_arg(args, bcut_test_fn);
-		unit_test(error_buffer, &pass);
-		if(!pass)
-		{
-			printf("\n\tFAIL: %s\n", error_buffer);
-		}			
-	}
-	if(pass)
-	{
-		printf("PASSED!\n");
-	}
+    for(i=0; i<n && pass; ++i)
+    {
+        unit_test = va_arg(args, bcut_test_fn);
+        unit_test(error_buffer, &pass);
+        if(!pass)
+        {
+            printf("\n\tFAIL: %s\n", error_buffer);
+        }           
+    }
+    if(pass)
+    {
+        printf("PASSED!\n");
+    }
 }
 
 
