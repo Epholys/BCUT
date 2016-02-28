@@ -36,10 +36,20 @@
  * 
  * int main()
  * {
- *  bcut_suite_run("Dummy test", 1, greater_test);
+ *  bcut_suite_run("Dummy test suite",
+ *                  1,                 // Number of unit tests
+ *                  greater_test       
+ *                  );
  *  return 0;
  * }
  * ~~~
+ *
+ * # Hacking
+ * By default, if a unit test fails, a message containing __func__, __LINE__ and
+ * the boolean expression tested is displayed. To avoid buffer overflows, this
+ * message has a limited size of 128 bytes defined by the macro BCUT_BUFFER_SIZE
+ * which you can easily override.
+ * 
  */
 
 #ifndef BCUT_H
@@ -58,7 +68,7 @@
 #endif
 
 /*! \brief Function's pointer typedef of BCUT_TEST() for using it in
- *  bcut_run_suite.
+ *  bcut_suite_run.
  */
 typedef void (*bcut_test_fn) (char*, bool*);
 
@@ -98,7 +108,7 @@ typedef void (*bcut_test_fn) (char*, bool*);
  *  \param[in] name The suite's name that will be reminded at the beginning of
  * the tests.
  *  \param[in] n The number of BCUT_TEST() provided by the variadic arguments.
- *  \param[in] ... All the bcut_test_fn -typed BCUT_TEST() that will be
+ *  \param[in] ... All the bcut_test_fn-typed BCUT_TEST() that will be
  * evaluated.
  */
 static inline void bcut_suite_run(const char* name, size_t n, ...)

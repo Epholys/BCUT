@@ -20,3 +20,5 @@ int main()
 }
 ~~~
 
+## Hacking
+By default, if a unit test fails, a message containing __func__, __LINE__ and the boolean expression tested is displayed. To avoid buffer overflows, this message has a limited size of 128 bytes defined by the macro BCUT_BUFFER_SIZE which you can easily override.
