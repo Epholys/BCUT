@@ -81,15 +81,15 @@ typedef void (*bcut_test_fn) (char*, bool*);
  *  Several BCUT_ASSERT() per BCUT_TEST() is authorized, but only the first
  *  failure will be reported.
  */
-#define BCUT_ASSERT(expr)                                               \
-    do{ \
-        if(*bcut_pass) { \
-            *bcut_pass=(expr); \
-            if(!(*bcut_pass)) { \
+#define BCUT_ASSERT(expr)                                                \
+    do{                                                                  \
+        if(*bcut_pass) {                                                 \
+            *bcut_pass=(expr);                                           \
+            if(!(*bcut_pass)) {                                          \
                 snprintf(bcut_error, BCUT_BUFFER_SIZE, "%s: l%d: "#expr, \
-                         __func__, __LINE__); \
-            } \
-        } \
+                         __func__, __LINE__);                            \
+            }                                                            \
+        }                                                                \
     }while(0)
 
 /*! \brief Groups and tests several BCUT_TEST() in a row, printing wether it
