@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * BCUT - Barebones C Unit Tests
- * Copyright 2015 Thomas Munoz (epholys@gmail.com)
+ * Copyright 2016 Thomas Munoz (epholys@gmail.com)
  *
  * BCUT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
